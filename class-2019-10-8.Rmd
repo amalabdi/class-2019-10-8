@@ -1,0 +1,48 @@
+---
+title: "Class 10/8"
+author: "Amal Abdi"
+date: "10/8/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+dice <- function () {
+  sample(1:6, size = 1)
+}
+
+roll_dice <- function(n = 1) {
+  dice() + dice ()
+  
+  result <- vector(mode = "integer", length = n)
+
+  for(i in 1:n){
+    result[i] <- dice() + dice()
+  }
+  return(result)
+}
+# creating vector where result is rolling two dice
+
+# have to store result of vector
+
+# should use mapping because above is ugly
+```
+
+
+```{r}
+# first is how many times you are calling it. length of index you are going to use, second is function you are calling (DONT FORGET ~)
+roll_dice_map <- function(n) {
+  map_int(1:n, ~ dice() + dice())
+}
+```
+
+```{r making a plot}
+# store results from roll_dice(100) in tibble 
+x <- tibble (rolls = roll_dice_map(1000))
+# actually making plot
+ggplot(x, aes(x=rolls)) + geom_histogram()
+```
